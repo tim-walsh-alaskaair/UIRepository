@@ -60,6 +60,26 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Button(action: {
+                fetchData(from: "https://api.jsonbin.io/v3/b/6615a7cdacd3cb34a835fbed/latest")
+            }) {
+                Text("Color Scheme 1")
+                    .foregroundColor(Color.white)
+                    .padding()
+                    .background(Color.black)
+                    .cornerRadius(8)
+            }
+            .buttonStyle(PlainButtonStyle())
+            Button(action: {
+                fetchData(from: "https://api.jsonbin.io/v3/b/6614765be41b4d34e4e15ad4/latest")
+            }) {
+                Text("Color Scheme 2")
+                    .foregroundColor(Color.white)
+                    .padding()
+                    .background(Color.black)
+                    .cornerRadius(8)
+            }
+            .buttonStyle(PlainButtonStyle())
+            Button(action: {
                 // Button action
             }) {
                 Text("Light Mode Primary")
@@ -82,14 +102,13 @@ struct ContentView: View {
             }
         .onAppear {
             // Delay fetching data by 2 seconds
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                fetchData()
-//            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                fetchData(from: "https://api.jsonbin.io/v3/b/6614765be41b4d34e4e15ad4/latest")
+            }
         }
     }
-    
-    func fetchData() {
-        guard let url = URL(string: "https://api.jsonbin.io/v3/b/6614765be41b4d34e4e15ad4/latest") else {
+    func fetchData(from urlString: String) {
+        guard let url = URL(string: urlString) else {
             print("Invalid URL")
             return
         }
